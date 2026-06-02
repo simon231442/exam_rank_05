@@ -12,5 +12,9 @@ vec2::vec2(vec2 const & src) : container_(src.container_) {}
 
 vec2::~vec2() {}
 
-
-
+vec2&	vec2::operator=(vec2 const & rhs)
+{
+	if (this != &rhs)
+		container_ = rhs.container_
+	return this;
+}
