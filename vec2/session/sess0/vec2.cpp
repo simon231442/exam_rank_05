@@ -16,5 +16,10 @@ vec2&	vec2::operator=(vec2 const & rhs)
 {
 	if (this != &rhs)
 		container_ = rhs.container_
-	return this;
+	return *this;
+}
+
+vec2	operator+(vec2 const & rhs) const
+{
+	return vec2(container_[0] + rhs.container_[0], container_[1] + rhs.container_[1]);
 }

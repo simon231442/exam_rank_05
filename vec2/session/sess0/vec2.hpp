@@ -14,12 +14,12 @@ class vec2 {
 		vec2(vec2 const & src);
 		~vec2();
 
-		vec2 &				operator=(vec2 const & rhs);
+		vec2&				operator=(vec2 const & rhs);
 		vec2				operator+(vec2 const & rhs) const;
 		vec2				operator-(vec2 const & rhs) const;
 		vec2				operator*(int scalar) const;
 
-		int					getContainer_elements(vec2 const & v) const;
+		int					getContainer_elements(int index) const;
 	};
 
 std::ostream &				operator<<(std::ostream & out, vec2 const & v);
