@@ -6,23 +6,43 @@
 
 class vect2
 {
-private:
-    std::vector<int> _container;
+    private:
+        std::vector<int> container_;
+    public:
+        vect2();
+        vect2(int num1, int num2);
+        vect2(const vect2& source);
+        vect2& operator=(const vect2& source);
 
-public:
-    vect2();
-    vect2(int v1, int v2);
-    vect2(const vect2& original);
-    ~vect2();
+        int operator[](int index) const;
+        int& operator[](int index);
 
-    int getContainer_elements(int index) const;
+        vect2 operator-() const;
+        vect2 operator*(int num) const;
 
-    vect2 operator+(const vect2& other) const;
-    vect2 operator-(const vect2& other) const;
-    vect2 operator*(int scalar) const;
-    vect2& operator=(const vect2& other);
+        vect2& operator*=(int num);
+
+        vect2& operator+=(const vect2& obj);
+        vect2& operator-=(const vect2& obj);
+        vect2& operator*=(const vect2& obj);
+
+        vect2 operator+(const vect2& obj) const;
+        vect2 operator-(const vect2& obj) const;
+        vect2 operator*(const vect2& obj) const;
+
+        vect2& operator++();
+        vect2 operator++(int);
+        vect2& operator--();
+        vect2 operator--(int);
+
+        bool operator==(const vect2& obj) const;
+        bool operator!=(const vect2& obj) const;
+
+        ~vect2();
 };
 
-std::ostream& operator<<(std::ostream& out, const vect2& v);
+vect2 operator*(int num, const vect2& obj);
+
+std::ostream& operator<<(std::ostream& os, const vect2& obj);
 
 #endif

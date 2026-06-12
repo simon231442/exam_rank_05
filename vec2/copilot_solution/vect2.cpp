@@ -1,56 +1,152 @@
 #include "vect2.hpp"
 
-#include <stdexcept>
-
-vect2::vect2() : _container(2, 0)
+vect2::vect2()
 {
+    container_.push_back(0);
+    container_.push_back(0);
 }
 
-vect2::vect2(int v1, int v2) : _container(2)
+vect2::vect2(int num1, int num2)
 {
-    _container[0] = v1;
-    _container[1] = v2;
+    container_.push_back(num1);
+    container_.push_back(num2);
 }
 
-vect2::vect2(const vect2& original) : _container(original._container)
+vect2::vect2(const vect2& source)
 {
+    *this = source;
+}
+
+vect2& vect2::operator=(const vect2& source)
+{
+    if (this != &source)
+        container_ = source.container_;
+    return (*this);
+}
+
+int vect2::operator[](int index) const
+{
+    return (container_[index]);
+}
+
+int& vect2::operator[](int index)
+{
+    return (container_[index]);
+}
+
+vect2 vect2::operator-() const
+{
+    vect2 temp(*this);
+    temp.container_[0] = -temp.container_[0];
+    temp.container_[1] = -temp.container_[1];
+    return (temp);
+}
+
+vect2 vect2::operator*(int num) const
+{
+    vect2 temp(*this);
+    temp *= num;
+    return (temp);
+}
+
+vect2& vect2::operator*=(int num)
+{
+    container_[0] *= num;
+    container_[1] *= num;
+    return (*this);
+}
+
+vect2& vect2::operator+=(const vect2& obj)
+{
+    container_[0] += obj.container_[0];
+    container_[1] += obj.container_[1];
+    return (*this);
+}
+
+vect2& vect2::operator-=(const vect2& obj)
+{
+    container_[0] -= obj.container_[0];
+    container_[1] -= obj.container_[1];
+    return (*this);
+}
+
+vect2& vect2::operator*=(const vect2& obj)
+{
+    container_[0] *= obj.container_[0];
+    container_[1] *= obj.container_[1];
+    return (*this);
+}
+
+vect2 vect2::operator+(const vect2& obj) const
+{
+    vect2 temp(*this);
+    temp += obj;
+    return (temp);
+}
+
+vect2 vect2::operator-(const vect2& obj) const
+{
+    vect2 temp(*this);
+    temp -= obj;
+    return (temp);
+}
+
+vect2 vect2::operator*(const vect2& obj) const
+{
+    vect2 temp(*this);
+    temp *= obj;
+    return (temp);
+}
+
+vect2& vect2::operator++()
+{
+    ++container_[0];
+    ++container_[1];
+    return (*this);
+}
+
+vect2 vect2::operator++(int)
+{
+    vect2 temp(*this);
+    ++(*this);
+    return (temp);
+}
+
+vect2& vect2::operator--()
+{
+    --container_[0];
+    --container_[1];
+    return (*this);
+}
+
+vect2 vect2::operator--(int)
+{
+    vect2 temp(*this);
+    --(*this);
+    return (temp);
+}
+
+bool vect2::operator==(const vect2& obj) const
+{
+    return (container_[0] == obj.container_[0] && container_[1] == obj.container_[1]);
+}
+
+bool vect2::operator!=(const vect2& obj) const
+{
+    return (!(*this == obj));
 }
 
 vect2::~vect2()
 {
 }
 
-int vect2::getContainer_elements(int index) const
+vect2 operator*(int num, const vect2& obj)
 {
-    if (index < 0 || index > 1)
-        throw std::out_of_range("vect2 index must be 0 or 1");
-    return _container[static_cast<std::size_t>(index)];
+    return (obj * num);
 }
 
-vect2 vect2::operator+(const vect2& other) const
+std::ostream& operator<<(std::ostream& os, const vect2& obj)
 {
-    return vect2(_container[0] + other._container[0], _container[1] + other._container[1]);
-}
-
-vect2 vect2::operator-(const vect2& other) const
-{
-    return vect2(_container[0] - other._container[0], _container[1] - other._container[1]);
-}
-
-vect2 vect2::operator*(int scalar) const
-{
-    return vect2(_container[0] * scalar, _container[1] * scalar);
-}
-
-vect2& vect2::operator=(const vect2& other)
-{
-    if (this != &other)
-        _container = other._container;
-    return *this;
-}
-
-std::ostream& operator<<(std::ostream& out, const vect2& v)
-{
-    out << "(" << v.getContainer_elements(0) << ", " << v.getContainer_elements(1) << ")";
-    return out;
+    os << "{" << obj[0] << ", " << obj[1] << "}";
+    return (os);
 }

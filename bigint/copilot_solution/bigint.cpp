@@ -1,169 +1,227 @@
 #include "bigint.hpp"
 
-#include <algorithm>
+#include <climits>
 #include <sstream>
-#include <vector>
 
-bool bigint::isDigitsOnly(const std::string& s) {
-  if (s.empty()) {
-    return false;
-  }
-  for (std::string::size_type i = 0; i < s.size(); ++i) {
-    if (s[i] < '0' || s[i] > '9') {
-      return false;
-    }
-  }
-  return true;
+static std::string reverse_string(const std::string& value)
+{
+	std::string result;
+	for (std::string::size_type i = value.size(); i > 0; --i)
+		result.push_back(value[i - 1]);
+	return (result);
 }
 
-std::string bigint::normalize(const std::string& s) {
-  std::string::size_type i = 0;
-  while (i < s.size() && s[i] == '0') {
-    ++i;
-  }
-  if (i == s.size()) {
-    return "0";
-  }
-  return s.substr(i);
+std::string bigint::normalize(const std::string& value)
+{
+	std::string::size_type index = 0;
+	while (index < value.size() && value[index] == '0')
+		++index;
+	if (index == value.size())
+		return ("0");
+	return (value.substr(index));
 }
 
-int bigint::compareAbs(const std::string& a, const std::string& b) {
-  if (a.size() < b.size()) {
-    return -1;
-  }
-  if (a.size() > b.size()) {
-    return 1;
-  }
-  if (a == b) {
-    return 0;
-  }
-  return (a < b) ? -1 : 1;
+std::string bigint::add_strings(const std::string& lhs, const std::string& rhs)
+{
+	std::string left = reverse_string(lhs);
+	std::string right = reverse_string(rhs);
+	std::string result;
+	std::size_t max_len = left.size() > right.size() ? left.size() : right.size();
+	int carry = 0;
+
+	for (std::size_t i = 0; i < max_len || carry != 0; ++i)
+	{
+		int digit_left = (i < left.size()) ? left[i] - '0' : 0;
+		int digit_right = (i < right.size()) ? right[i] - '0' : 0;
+		int sum = digit_left + digit_right + carry;
+		result.push_back(static_cast<char>('0' + (sum % 10)));
+		carry = sum / 10;
+	}
+	return (normalize(reverse_string(result)));
 }
 
-std::string bigint::addStrings(const std::string& a, const std::string& b) {
-  std::string result;
-  int i = static_cast<int>(a.size()) - 1;
-  int j = static_cast<int>(b.size()) - 1;
-  int carry = 0;
-
-  while (i >= 0 || j >= 0 || carry != 0) {
-    int da = (i >= 0) ? (a[static_cast<std::string::size_type>(i)] - '0') : 0;
-    int db = (j >= 0) ? (b[static_cast<std::string::size_type>(j)] - '0') : 0;
-    int sum = da + db + carry;
-
-    result.push_back(static_cast<char>('0' + (sum % 10)));
-    carry = sum / 10;
-    --i;
-    --j;
-  }
-
-  std::reverse(result.begin(), result.end());
-  return normalize(result);
+int bigint::compare_strings(const std::string& lhs, const std::string& rhs)
+{
+	if (lhs.size() < rhs.size())
+		return (-1);
+	if (lhs.size() > rhs.size())
+		return (1);
+	if (lhs == rhs)
+		return (0);
+	return (lhs < rhs ? -1 : 1);
 }
 
-std::string bigint::subStrings(const std::string& a, const std::string& b) {
-  std::string result;
-  int i = static_cast<int>(a.size()) - 1;
-  int j = static_cast<int>(b.size()) - 1;
-  int borrow = 0;
-
-  while (i >= 0) {
-    int da = a[static_cast<std::string::size_type>(i)] - '0' - borrow;
-    int db = (j >= 0) ? (b[static_cast<std::string::size_type>(j)] - '0') : 0;
-
-    if (da < db) {
-      da += 10;
-      borrow = 1;
-    } else {
-      borrow = 0;
-    }
-
-    result.push_back(static_cast<char>('0' + (da - db)));
-    --i;
-    --j;
-  }
-
-  std::reverse(result.begin(), result.end());
-  return normalize(result);
+unsigned long long bigint::parse_count(const std::string& value)
+{
+	unsigned long long count = 0;
+	for (std::string::size_type i = 0; i < value.size(); ++i)
+	{
+		unsigned int digit = static_cast<unsigned int>(value[i] - '0');
+		if (count > (ULLONG_MAX - digit) / 10)
+			return (ULLONG_MAX);
+		count = count * 10 + digit;
+	}
+	return (count);
 }
 
-std::string bigint::mulStrings(const std::string& a, const std::string& b) {
-  if (a == "0" || b == "0") {
-    return "0";
-  }
-
-  std::vector<int> acc(a.size() + b.size(), 0);
-
-  for (int i = static_cast<int>(a.size()) - 1; i >= 0; --i) {
-    for (int j = static_cast<int>(b.size()) - 1; j >= 0; --j) {
-      int da = a[static_cast<std::string::size_type>(i)] - '0';
-      int db = b[static_cast<std::string::size_type>(j)] - '0';
-
-      int posLow = i + j + 1;
-      int posHigh = i + j;
-
-      int sum = da * db + acc[static_cast<std::size_t>(posLow)];
-      acc[static_cast<std::size_t>(posLow)] = sum % 10;
-      acc[static_cast<std::size_t>(posHigh)] += sum / 10;
-    }
-  }
-
-  std::string result;
-  std::size_t k = 0;
-  while (k < acc.size() && acc[k] == 0) {
-    ++k;
-  }
-  for (; k < acc.size(); ++k) {
-    result.push_back(static_cast<char>('0' + acc[k]));
-  }
-
-  return normalize(result);
+std::string bigint::shift_left(const std::string& value, unsigned long long count)
+{
+	if (value == "0")
+		return ("0");
+	std::string result = value;
+	result.append(static_cast<std::string::size_type>(count), '0');
+	return (normalize(result));
 }
 
-bigint::bigint() : _string("0") {}
-
-bigint::bigint(unsigned int n) {
-  std::ostringstream oss;
-  oss << n;
-  _string = normalize(oss.str());
+std::string bigint::shift_right(const std::string& value, unsigned long long count)
+{
+	if (count >= value.size())
+		return ("0");
+	return (normalize(value.substr(0, value.size() - static_cast<std::string::size_type>(count))));
 }
 
-bigint::bigint(const std::string& str) {
-  if (!isDigitsOnly(str)) {
-    throw std::invalid_argument("bigint: invalid numeric string");
-  }
-  _string = normalize(str);
+bigint::bigint() : str("0")
+{
 }
 
-bigint::bigint(const bigint& original) : _string(original._string) {}
-
-bigint::~bigint() {}
-
-std::string bigint::getArbiter_value() const { return _string; }
-
-bigint bigint::operator+(const bigint& other) const {
-  return bigint(addStrings(_string, other._string));
+bigint::bigint(unsigned int num)
+{
+	std::string value;
+	if (num == 0)
+		value = "0";
+	else
+	{
+		while (num > 0)
+		{
+			value.push_back(static_cast<char>('0' + (num % 10)));
+			num /= 10;
+		}
+		value = reverse_string(value);
+	}
+	str = normalize(value);
 }
 
-bigint bigint::operator-(const bigint& other) const {
-  if (compareAbs(_string, other._string) < 0) {
-    throw std::underflow_error("bigint: negative result is not supported");
-  }
-  return bigint(subStrings(_string, other._string));
+bigint::bigint(const std::string& value) : str(normalize(value))
+{
 }
 
-bigint bigint::operator*(const bigint& other) const {
-  return bigint(mulStrings(_string, other._string));
+bigint::bigint(const bigint& source) : str(source.str)
+{
 }
 
-bigint& bigint::operator=(const bigint& other) {
-  if (this != &other) {
-    _string = other._string;
-  }
-  return *this;
+bigint& bigint::operator=(const bigint& source)
+{
+	if (this != &source)
+		str = source.str;
+	return (*this);
 }
 
-std::ostream& operator<<(std::ostream& out, const bigint& value) {
-  out << value._string;
-  return out;
+bigint::~bigint()
+{
+}
+
+std::string bigint::getStr() const
+{
+	return (str);
+}
+
+bigint bigint::operator+(const bigint& other) const
+{
+	return (bigint(add_strings(str, other.str)));
+}
+
+bigint& bigint::operator+=(const bigint& other)
+{
+	str = add_strings(str, other.str);
+	return (*this);
+}
+
+bigint bigint::operator<<(unsigned int n) const
+{
+	return (bigint(shift_left(str, n)));
+}
+
+bigint bigint::operator>>(unsigned int n) const
+{
+	return (bigint(shift_right(str, n)));
+}
+
+bigint& bigint::operator<<=(unsigned int n)
+{
+	str = shift_left(str, n);
+	return (*this);
+}
+
+bigint& bigint::operator>>=(unsigned int n)
+{
+	str = shift_right(str, n);
+	return (*this);
+}
+
+bigint bigint::operator<<(const bigint& other) const
+{
+	return (*this << parse_count(other.str));
+}
+
+bigint bigint::operator>>(const bigint& other) const
+{
+	return (*this >> parse_count(other.str));
+}
+
+bigint& bigint::operator<<=(const bigint& other)
+{
+	return (*this <<= parse_count(other.str));
+}
+
+bigint& bigint::operator>>=(const bigint& other)
+{
+	return (*this >>= parse_count(other.str));
+}
+
+bigint& bigint::operator++()
+{
+	return (*this += bigint(1));
+}
+
+bigint bigint::operator++(int)
+{
+	bigint temp(*this);
+	++(*this);
+	return (temp);
+}
+
+bool bigint::operator==(const bigint& other) const
+{
+	return (str == other.str);
+}
+
+bool bigint::operator!=(const bigint& other) const
+{
+	return (!(*this == other));
+}
+
+bool bigint::operator<(const bigint& other) const
+{
+	return (compare_strings(str, other.str) < 0);
+}
+
+bool bigint::operator>(const bigint& other) const
+{
+	return (compare_strings(str, other.str) > 0);
+}
+
+bool bigint::operator<=(const bigint& other) const
+{
+	return (compare_strings(str, other.str) <= 0);
+}
+
+bool bigint::operator>=(const bigint& other) const
+{
+	return (compare_strings(str, other.str) >= 0);
+}
+
+std::ostream& operator<<(std::ostream& output, const bigint& obj)
+{
+	output << obj.getStr();
+	return (output);
 }

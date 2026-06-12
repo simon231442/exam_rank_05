@@ -2,31 +2,36 @@
 
 #include <iostream>
 
-int main() {
-  try {
-    bigint a("123456789012345678901234567890");
-    bigint b(987654321);
+int main()
+{
+	const bigint a(42);
+	bigint b(21), c, d(1337), e(d);
 
-    bigint sum = a + b;
-    bigint diff("1000000000000000000000");
-    bigint diff2("999999999999999999999");
-    bigint prod = bigint("123456789") * bigint("987654321");
+	std::cout << "a = " << a << std::endl;
+	std::cout << "b = " << b << std::endl;
+	std::cout << "c = " << c << std::endl;
+	std::cout << "d = " << d << std::endl;
+	std::cout << "e = " << e << std::endl;
 
-    std::cout << "a      = " << a << '\n';
-    std::cout << "b      = " << b << '\n';
-    std::cout << "a + b  = " << sum << '\n';
-    std::cout << "d1-d2  = " << (diff - diff2) << '\n';
-    std::cout << "prod   = " << prod << '\n';
+	std::cout << "a + b = " << a + b << std::endl;
+	std::cout << "(c += a) = " << (c += a) << std::endl;
 
-    bigint z("0000000");
-    std::cout << "zero   = " << z << '\n';
+	std::cout << "b = " << b << std::endl;
+	std::cout << "++b = " << ++b << std::endl;
+	std::cout << "b++ = " << b++ << std::endl;
 
-    // This line intentionally demonstrates input validation.
-    // bigint bad("12a34");
-  } catch (const std::exception& e) {
-    std::cerr << "Error: " << e.what() << '\n';
-    return 1;
-  }
+	std::cout << "(b << 10) + 42 = " << ((b << 10) + 42) << std::endl;
+	std::cout << "(d <<= 4) = " << (d <<= 4) << std::endl;
+	std::cout << "(d >>= 2) = " << (d >>= (const bigint)2) << std::endl;
 
-  return 0;
+	std::cout << "a =" << a << std::endl;
+	std::cout << "d =" << d << std::endl;
+
+	std::cout << "(d < a) = " << (d < a) << std::endl;
+	std::cout << "(d <= a) = " << (d <= a) << std::endl;
+	std::cout << "(d > a) = " << (d > a) << std::endl;
+	std::cout << "(d >= a) = " << (d >= a) << std::endl;
+	std::cout << "(d == a) = " << (d == a) << std::endl;
+	std::cout << "(d != a) = " << (d != a) << std::endl;
+	return (0);
 }
