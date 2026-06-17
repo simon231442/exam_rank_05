@@ -22,7 +22,7 @@ class	vect2 {
 
 		vect2				operator*=(int scalar);
 		vect2				operator*=(vect2 const & rhs);
-		vect2				operator+=(vect2 const & rhs);// pourquoi de += un scalaire ?
+		vect2				operator+=(vect2 const & rhs);// pourquoi pas de += un scalaire ?
 		vect2				operator-=(vect2 const & rhs);
 
 		~vect2();

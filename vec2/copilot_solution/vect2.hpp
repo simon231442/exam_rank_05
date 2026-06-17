@@ -17,23 +17,23 @@ class vect2
         int operator[](int index) const;
         int& operator[](int index);
 
-        vect2 operator-() const;
+        vect2 operator-() const;//:46
         vect2 operator*(int num) const;
 
         vect2& operator*=(int num);
 
-        vect2& operator+=(const vect2& obj);
-        vect2& operator-=(const vect2& obj);
+        vect2& operator+=(const vect2& obj);//:37
+        vect2& operator-=(const vect2& obj);//:38
         vect2& operator*=(const vect2& obj);
 
         vect2 operator+(const vect2& obj) const;
-        vect2 operator-(const vect2& obj) const;
+        vect2 operator-(const vect2& obj) const;//:43
         vect2 operator*(const vect2& obj) const;
 
         vect2& operator++();
         vect2 operator++(int);
-        vect2& operator--();
-        vect2 operator--(int);
+        vect2& operator--();//:36
+        vect2 operator--(int);//:35
 
         bool operator==(const vect2& obj) const;
         bool operator!=(const vect2& obj) const;
