@@ -12,15 +12,15 @@ class	vect2 {
 		vect2(int x, int y);
 		vect2(vect2 const & src);
 
-		vect2&				operator=(vect2 const & rhs);
+		vect2&				operator=(vect2 const & rhs);	// v1 = v2;
 
-		int					operator[](int index) const;
-		int&				operator[](int index);
+		int					operator[](int index) const;	// x = v[0];
+		int&				operator[](int index);			// v[1] = y;
 
-		vect2				operator-() const;//opérateur unaire moins (Négation)
-		vect2				operator*(int scalar) const;
+		vect2				operator-() const;//opérateur unaire moins (Négation) // v1 = -v2
+		vect2				operator*(int scalar) const;	// v2 = v1 * 3;
 
-		vect2				operator*=(int scalar);
+		vect2				operator*=(int scalar);			// v *= 3;
 		vect2				operator*=(vect2 const & rhs);
 		vect2				operator+=(vect2 const & rhs);// pourquoi pas de += un scalaire ?
 		vect2				operator-=(vect2 const & rhs);

@@ -14,8 +14,8 @@ class vect2
         vect2(const vect2& source);//:25
         vect2& operator=(const vect2& source);//:26
 
-        int operator[](int index) const;//:49,50
-        int& operator[](int index);//:47,48
+        int operator[](int index) const;//:47, 49,50
+        int& operator[](int index);//:48
 
         vect2 operator-() const;//:46
         vect2 operator*(int num) const;//:39
