@@ -6,7 +6,7 @@
 
 class	vect2 {
 	private :
-		std::vector<int>	_container;
+		std::vector<int>	container_;
 	public :
 		vect2();
 		vect2(int x, int y);
@@ -28,7 +28,7 @@ class	vect2 {
 		vect2&				operator++();					//++v; pourquoi ici &
 		vect2				operator++(int);				//v++; et pas la ???
 		vect2&				operator--();					//--v;
-		vect2				operator--();
+		vect2				operator--(int);
 
 		bool				operator==(vect2 const& rhs) const; // bool = (v1 == v2)
 		bool				operator!=(vect2 const& rhs) const; // bool = (v1 != v2)
