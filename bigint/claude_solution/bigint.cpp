@@ -96,7 +96,9 @@ bigint& bigint::operator>>=(unsigned long long n)
 	// Tronquer par la droite ne peut jamais faire apparaitre un zero
 	// non significatif : le premier caractere conserve est celui du
 	// nombre d'origine, deja non nul par invariant. Pas besoin de normalize.
-	_digits = (n >= _digits.size()) ? "0" : _digits.substr(0, _digits.size() - n);
+	std::string::size_type count = static_cast<std::string::size_type>(n);
+
+	_digits = (count >= _digits.size()) ? "0" : _digits.substr(0, _digits.size() - count);
 	return (*this);
 }
 

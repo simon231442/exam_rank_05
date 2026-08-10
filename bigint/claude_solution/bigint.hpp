@@ -45,9 +45,9 @@ class bigint
 	private:
 		std::string _digits;
 
-		static std::string			add(const std::string& a, const std::string& b);
-		static bool					less(const std::string& a, const std::string& b);
-		static unsigned long long	toULL(const std::string& s);
+		static std::string        add(const std::string& a, const std::string& b);
+		static bool                less(const std::string& a, const std::string& b);
+		static unsigned long long toULL(const std::string& s);
 };
 
 #endif
