@@ -29,10 +29,10 @@ class	vect2 {
 		vect2				operator*(int scalar) const;			// Opérateur de multiplication par scalaire // v2 = v1 * 3;
 
 		// --- Maths : opérateurs d'affectation composée (mutants, modifient *this) ---
-		vect2&				operator*=(int scalar);		// Opérateur multiplication-affectation (scalaire)		// v *= 3;
 		//vect2				operator*=(vect2 const & rhs);	// Opérateur multiplication-affectation (vecteur) — NON implémenté, pas de sens géométrique standard // v1 *= v2;
 		vect2&				operator+=(vect2 const & rhs);	// Opérateur addition-affectation							// v1 += v2;
 		vect2&				operator-=(vect2 const & rhs);	// Opérateur soustraction-affectation						// v1 -= v2;
+		vect2&				operator*=(int scalar);		// Opérateur multiplication-affectation (scalaire)		// v *= 3;
 
 		// --- Incrémentation / Décrémentation ---
 		vect2&				operator++();					// Opérateur de pré-incrémentation (retourne une référence : modifie et renvoie l'objet lui-même)	// ++v;
