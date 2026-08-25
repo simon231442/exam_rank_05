@@ -2,15 +2,15 @@
 
 searchable_tree_bag::searchable_tree_bag() {}
 
-searchable_tree_bag::searchable_tree_bag(searchable_tree_bag const & src) : array_bag(src) {}
+searchable_tree_bag::searchable_tree_bag(searchable_tree_bag const & src) : tree_bag(src) {}
 
 searchable_tree_bag::~searchable_tree_bag() {}
 
 searchable_tree_bag&	searchable_tree_bag::operator=(searchable_tree_bag const & rhs)
 {
-	if (this != &source)
-		array_bag::operator=(rhs);
-	return this;
+	if (this != &rhs)
+		tree_bag::operator=(rhs);
+	return *this;
 }
 
 bool					searchable_tree_bag::search(node* node, const int value) const
@@ -20,7 +20,7 @@ bool					searchable_tree_bag::search(node* node, const int value) const
 	if (node->value == value)
 		return true;
 	if (value < node->value)
-		return (search(node-l, value));
+		return (search(node->l, value));
 	return (search(node->r, value));
 }
 

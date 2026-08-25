@@ -8,9 +8,9 @@ searchable_array_bag::~searchable_array_bag() {}
 
 searchable_array_bag&	searchable_array_bag::operator=(searchable_array_bag const & rhs)
 {
-	if (this != &source)
+	if (this != &rhs)
 		array_bag::operator=(rhs);
-	return this;
+	return *this;
 }
 
 bool					searchable_array_bag::has(int value) const

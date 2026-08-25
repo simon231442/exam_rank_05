@@ -5,7 +5,7 @@
 class set {
 	private :
 		searchable_bag&				bag;
-	plublic :
+	public :
 		set() = delete;
 		set(set const & src) = delete;
 		set& 						operator=(set const& src) = delete;
@@ -19,6 +19,6 @@ class set {
 		void						print() const;
 		void						clear();
 
-		searchable_bag& const		get_bag();
+		const searchable_bag&		get_bag();
 };
 

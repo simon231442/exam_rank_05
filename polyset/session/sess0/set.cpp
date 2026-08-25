@@ -12,13 +12,15 @@ void	set::insert(int value)
 			bag.insert(value);
 }
 
+void	set::insert(int *value, int size)
+{
 	for (int i = 0; i < size; i++)
-			this->insert(data[i]);
+			this->insert(value[i]);
 }
 
 void	set::print() const { bag.print(); }
 
 void	set::clear() { bag.clear(); }
 
-searchable const &		set::get_bag() { return this->bag; }
+const searchable_bag&		set::get_bag() { return this->bag; }
 
