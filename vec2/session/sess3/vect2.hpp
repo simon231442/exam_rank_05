@@ -16,13 +16,13 @@ class	vect2 {
 		vect2&				operator=(vect2 const & rhs);
 
 		int					operator[](int index) const;
-		int					operator[](int index);
+		int&				operator[](int index);
 
 		vect2				operator-() const;
 
 		vect2				operator+(vect2 const & rhs) const;
 		vect2				operator-(vect2 const & rhs) const;
-		vect2				operator*(int scalar);
+		vect2				operator*(int scalar) const;
 
 		vect2&				operator+=(vect2 const & rhs);
 		vect2&				operator-=(vect2 const & rhs);
