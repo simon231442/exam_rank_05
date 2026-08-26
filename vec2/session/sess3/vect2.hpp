@@ -29,9 +29,9 @@ class	vect2 {
 		vect2&				operator*=(int scalar);
 
 		vect2&				operator++();
-		vect2&				operator++(int);
+		vect2				operator++(int);
 		vect2&				operator--();
-		vect2&				operator--(int);
+		vect2				operator--(int);
 
 		bool				operator==(vect2 const & rhs) const;
 		bool				operator!=(vect2 const & rhs) const;
