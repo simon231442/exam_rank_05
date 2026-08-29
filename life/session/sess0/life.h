@@ -8,7 +8,7 @@ typedef struct s_game
 {
 	int		width;
 	int		height;
-	int		interation;
+	int		iterations;
 	char	alive;
 	char	dead;
 	int		i;
