@@ -44,7 +44,7 @@ void	free_board(t_game* game)
 void	fill_board(t_game* game)
 {
 	char	buffer;
-	int		flag = 0;
+	int		valid = 1;
 
 	while (read(STDIN_FILENO, &buffer, 1) == 1)
 	{
@@ -52,11 +52,56 @@ void	fill_board(t_game* game)
 		{
 			case 'w':
 				if (game->i > 0)
+					game->i--;
+				break;
+			case 's':
+				if (game->i < game->height - 1)
 					game->i++;
 				break;
-			case 's' :
-				if (game->i > 0)
+			case 'a':
+				if (game->j > 0)
+					game->j--;
+				break;
+			case 'd':
+				if (game->j < game->width - 1)
 					game->j++;
+				break;
+			case 'x':
+				game->draw = (!game->draw);
+				break;
+			default :
+				valid = 0;
+		}
+		if (valid && game->draw)
+			game->board[game->i][game->j] = game->alive;
+	}
+}
+
+int		play(t_game *game)
+{
+	char**	temp = (char**)malloc((game->height) * sizeof(char *));
+	if (!tmp)
+		return -1;
+	for (int i = 0; i < game->height; i++)
+	{
+		temp[i] = (char*)malloc(sizeof(char) * game->width);
+		if (!temp[i])
+			return(-1);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 int		main(int ac, char* av[])
@@ -67,5 +112,15 @@ int		main(int ac, char* av[])
 
 	if (init_game(&game, argv) == -1)
 		return 1;
+
 	fill_board(&game);
+
+	for (int i = 0; i < game->iterations; i++)
+	{
+		if (play(&game) == -1)
+		{
+			free_board(&game) == -1;
+			return 1;
+		}
+	
 
