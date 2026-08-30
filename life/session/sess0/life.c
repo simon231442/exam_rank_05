@@ -32,7 +32,7 @@ void	free_board(t_game* game)
 {
 	if (game->board)
 	{
-		for (int i; i < game->height; i++)
+		for (int i = 0; i < game->height; i++)
 		{
 			if (game->board[i])
 				free(game->board[i]);
@@ -139,7 +139,7 @@ void	print_board(t_game* game)
 {
 	for (int i = 0; i < game->height; i++)
 	{
-		for (int j = 0; i < game->width; i++)
+		for (int j = 0; j < game->width; j++)
 			write(1, &game->board[i][j], 1);
 		write(1, "\n", 1);
 	}
@@ -160,7 +160,7 @@ int		main(int ac, char* av[])
 	{
 		if (play(&game) == -1)
 		{
-			free_board(&game) == -1;
+			free_board(&game);
 			return 1;
 		}
 	}
