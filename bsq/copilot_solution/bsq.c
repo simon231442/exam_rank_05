@@ -101,6 +101,7 @@ int loadMap(FILE* file, t_map* map, t_elements* elements)
 	for (int i = 0; i < map->height; i++)
 	{
 		int read = getline(&line, &len, file);
+		int read = getline(&map->grid[i], &len, file);
 		if (read == -1) {
 			free(line);
 			free_map(map->grid);
