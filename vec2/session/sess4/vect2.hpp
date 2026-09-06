@@ -6,7 +6,7 @@
 
 class vect2 {
 	public :
-		std::vector		vec;
+		std::vector<int>		vec_;
 
 		vect2();
 		vect2(int x, int y);
@@ -33,6 +33,5 @@ class vect2 {
 		std::ostream	operator<<(std::ostream out; vect2 vec);
 		vect2			operator*(int scalar);
 		vect2			operator+(int scalar);
+	};
 	
-
-
