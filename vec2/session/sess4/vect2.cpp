@@ -105,12 +105,13 @@ std::ostream &	vect2::operator<<(std::ostream out, vect2 vect) const
 		return out;
 }
 
-vect2			vect2::operator*(int scalar)
+vect2			vect2::operator*(int scalar, vect2 const rhs)
 {
-
+	return (vec(scalar * rhs[0], scalar * rhs[1]);
 }
 
-vect2			vect2::operator+(int scalar)
+vect2			vect2::operator+(int scalar, vect2 const rhs)
 {
+	return (vec(scalar + rhs[0], scalar + rhs[1]);
 }
 
