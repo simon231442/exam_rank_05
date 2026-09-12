@@ -25,12 +25,12 @@ class vect2 {
 
 		vect2			operator+=(vect2 const & rhs);
 		vect2			operator-=(vect2 const & rhs);
-		vect2			operator*=(int scalar const)
+		vect2			operator*=(int scalar const);
 		
 		vect2 &			operator[](int index) const;
 		vect2			operator[](int index) const;
 	friend :
-		std::ostream	operator<<(std::ostream out; vect2 vec);
+		std::ostream	operator<<(std::ostream out, vect2 vec);
 		vect2			operator*(int scalar);
 		vect2			operator+(int scalar);
 	};
