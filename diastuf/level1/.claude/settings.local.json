@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gcc -Wall -Wextra -Werror -o bsq bsq.c)",
+      "Bash(./bsq ex.txt)",
+      "Bash(valgrind --leak-check=full --error-exitcode=1 -q ./bsq ex.txt nope ex.txt)",
+      "Bash(echo \"exit=$?\")",
+      "Bash(valgrind -q --leak-check=full --error-exitcode=1 ./bsq)",
+      "Bash(echo \"invalid-map exit=$?\")"
+    ]
+  }
+}

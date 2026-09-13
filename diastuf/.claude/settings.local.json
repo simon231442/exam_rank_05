@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cp main.cpp main_test.cpp)",
+      "Bash(sed -i 's/\"bigint.hpp\"/\"bigint_clean.hpp\"/' main_test.cpp)",
+      "Bash(c++ -Wall -Wextra -std=c++11 bigint_clean.cpp main_test.cpp -o test_clean)",
+      "Bash(./test_clean)"
+    ]
+  }
+}

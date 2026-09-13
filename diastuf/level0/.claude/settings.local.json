@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(sed 's/#include \"bigint.hpp\"/#include \"bigint3.hpp\"/' main.cpp)",
+      "Bash(g++ -Wall -Wextra -Werror -std=c++98 -I. /tmp/main3.cpp bigint3.cpp -o /tmp/bigint3_test)",
+      "Bash(/tmp/bigint3_test)"
+    ]
+  }
+}
