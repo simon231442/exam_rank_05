@@ -69,8 +69,8 @@ vect2			vect2::operator--(int)
 
 vect2 &			vect2::operator--()
 {
-	++vec_[0];
-	++vec_[1];
+	--vec_[0];
+	--vec_[1];
 	return *this;
 }
 
@@ -112,12 +112,12 @@ bool			vect2::operator==(vect2 const & rhs) const
 
 bool			vect2::operator!=(vect2 const & rhs) const
 {
-	return (vec_[0] != rhs.vec_[0] && vec_[1] != rhs.vec_[1]);
+	return !(*this == rhs);
 }
 
 std::ostream &	operator<<(std::ostream & out, vect2 const & vect)
 {
-        out << "{" << vect[0] << ", " << vect[1] << "}" << std::endl;
+        out << "{" << vect[0] << ", " << vect[1] << "}";
 		return out;
 }
 
