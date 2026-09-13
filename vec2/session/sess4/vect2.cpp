@@ -53,7 +53,7 @@ vect2			vect2::operator++(int)
 	return tmp;
 }
 
-vect2			vect2::operator++()
+vect2 &			vect2::operator++()
 {
 	++vec_[0];
 	++vec_[1];
@@ -67,28 +67,28 @@ vect2			vect2::operator--(int)
 	return tmp;
 }
 
-vect2			vect2::operator--()
+vect2 &			vect2::operator--()
 {
 	++vec_[0];
 	++vec_[1];
 	return *this;
 }
 
-vect2			vect2::operator+=(vect2 const & rhs)
+vect2 &			vect2::operator+=(vect2 const & rhs)
 {
 	vec_[0] += rhs.vec_[0];
 	vec_[1] += rhs.vec_[1];
 	return *this;
 }
 
-vect2			vect2::operator-=(vect2 const & rhs)
+vect2 &			vect2::operator-=(vect2 const & rhs)
 {
 	vec_[0] -= rhs.vec_[0];
 	vec_[1] -= rhs.vec_[1];
 	return *this;
 }
 
-vect2			vect2::operator*=(int scalar)
+vect2 &			vect2::operator*=(int scalar)
 {
 	vec_[0] *= scalar;
 	vec_[1] *= scalar;
