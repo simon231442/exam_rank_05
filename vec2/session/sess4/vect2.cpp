@@ -4,15 +4,13 @@ vect2::vect2() : vec_(2, 0)
 {
 
 }
-vect2::vect2(int x, int y)
+vect2::vect2(int x, int y) : vec_(2)
 {
 	vec_[0] = x;
 	vec_[1] = y;
 }
-vect2::vect2(vect2 const & src)
+vect2::vect2(vect2 const & src) : vec_(src.vec_)
 {
-	vec_[0] = src.vec_[0];
-	vec_[1] = src.vec_[1];
 }
 vect2::~vect2()
 {
@@ -41,6 +39,11 @@ vect2			vect2::operator-(vect2 const & rhs) const
 vect2			vect2::operator*(int scalar) const
 {
 	return vect2(this->vec_[0] * scalar, this->vec_[1] * scalar);
+}
+
+vect2			vect2::operator-() const
+{
+	return vect2(-vec_[0], -vec_[1]);
 }
 
 vect2			vect2::operator++(int)
@@ -102,19 +105,28 @@ int				vect2::operator[](int index) const
 	return vec_[index];
 }
 
+bool			vect2::operator==(vect2 const & rhs) const
+{
+	return (vec_[0] == rhs.vec_[0] && vec_[1] == rhs.vec_[1]);
+}
+
+bool			vect2::operator!=(vect2 const & rhs) const
+{
+	return (vec_[0] != rhs.vec_[0] && vec_[1] != rhs.vec_[1]);
+}
+
 std::ostream &	operator<<(std::ostream & out, vect2 const & vect)
 {
         out << "{" << vect[0] << ", " << vect[1] << "}" << std::endl;
 		return out;
 }
 
-vect2			operator*(int scalar, vect2 const rhs)
+vect2			operator*(int scalar, vect2 const & rhs)
 {
 	return vect2(scalar * rhs[0], scalar * rhs[1]);
 }
 
-vect2			operator+(int scalar, vect2 const rhs)
+vect2			operator+(int scalar, vect2 const & rhs)
 {
 	return vect2(scalar + rhs[0], scalar + rhs[1]);
 }
-

@@ -17,6 +17,8 @@ class vect2 {
 		vect2			operator+(vect2 const & rhs) const;
 		vect2			operator-(vect2 const & rhs) const;
 		vect2			operator*(int scalar) const;
+
+		vect2			operator-() const;
 		
 		vect2			operator++(int);
 		vect2			operator++();
@@ -29,6 +31,9 @@ class vect2 {
 		
 		int &			operator[](int index);
 		int				operator[](int index) const;
+
+		bool			operator==(vect2 const & rhs) const;
+		bool			operator!=(vect2 const & rhs) const;
 
 		friend std::ostream &	operator<<(std::ostream & out, vect2 const & vec);
 		friend vect2			operator*(int scalar, vect2 const & rhs);
