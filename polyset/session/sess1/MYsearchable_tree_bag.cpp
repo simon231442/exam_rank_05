@@ -15,15 +15,16 @@ searchable_tree_bag::~searchable_tree_bag() { }
 
 static bool				search_value(node node, int value)
 {
+	if (node == 0)
+		return false;
 	if (node.value == value)
 		return true;
-	return false;
+	if (node.value < value)
+		return search_value(*(node.l), value);
+	return search_value(*(node.r), value);
 }
 
 bool					searchable_tree_bag::has(int value)
 {
-	if (search_value(tree->node, value))
-		return true;
-
-
-
+	return search_value(*tree, value);
+}
