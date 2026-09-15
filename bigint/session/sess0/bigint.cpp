@@ -5,7 +5,7 @@ bigint::bigint() : digits_("0") {}
 bigint::bigint(unsigned int n)
 {
 	if  (n == 0)
-		digit_ = "0";
+		digits_ = "0";
 	std::string		digits;
 	while (n > 0)
 	{
