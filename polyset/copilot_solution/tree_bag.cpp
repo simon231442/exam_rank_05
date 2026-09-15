@@ -3,7 +3,7 @@
 
 tree_bag::tree_bag()
 {
-	tree = nullptr;
+	tree = 0;
 }
 
 tree_bag::tree_bag(const tree_bag &src)
@@ -29,7 +29,7 @@ tree_bag &tree_bag::operator=(const tree_bag &src)
 tree_bag::node *tree_bag::extract_tree()
 {
 	node *temp = tree;
-	tree = nullptr;
+	tree = 0;
 	return temp;
 }
 
@@ -44,10 +44,10 @@ void tree_bag::insert(int item)
 	node *new_node = new node;
 	std::cout << "create node: " << item << std::endl;
 	new_node->value = item;
-	new_node->l = nullptr;
-	new_node->r = nullptr;
+	new_node->l = 0;
+	new_node->r = 0;
 
-	if (tree == nullptr)
+	if (tree == 0)
 		tree = new_node;
 	else
 	{
@@ -56,7 +56,7 @@ void tree_bag::insert(int item)
 		{
 			if (item < current->value)
 			{
-				if (current->l == nullptr)
+				if (current->l == 0)
 				{
 					current->l = new_node;
 					break;
@@ -65,7 +65,7 @@ void tree_bag::insert(int item)
 			}
 			else if (item > current->value)
 			{
-				if (current->r == nullptr)
+				if (current->r == 0)
 				{
 					current->r = new_node;
 					break;
@@ -97,12 +97,12 @@ void tree_bag::print() const
 void tree_bag::clear()
 {
 	destroy_tree(tree);
-	tree = nullptr;
+	tree = 0;
 }
 
 void tree_bag::destroy_tree(node *current)
 {
-	if (current != nullptr)
+	if (current != 0)
 	{
 		std::cout << "destroying value: " << current->value << std::endl;
 		destroy_tree(current->l);
@@ -113,7 +113,7 @@ void tree_bag::destroy_tree(node *current)
 
 void tree_bag::print_node(node *current)
 {
-	if (current != nullptr)
+	if (current != 0)
 	{
 		print_node(current->l);
 		if (current->value != 0)
@@ -124,8 +124,8 @@ void tree_bag::print_node(node *current)
 
 tree_bag::node *tree_bag::copy_node(node *current)
 {
-	if (current == nullptr)
-		return nullptr;
+	if (current == 0)
+		return 0;
 	node *new_node = new node;
 	new_node->value = current->value;
 	new_node->l = copy_node(current->l);

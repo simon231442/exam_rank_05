@@ -5,11 +5,11 @@
 class set
 {
  private:
+	set();
+	set(const set& source);
+	set& operator=(const set& source);
 	searchable_bag& bag;
  public:
-	set() = delete;
-	set(const set& source) = delete;
-	set& operator=(const set& source) = delete;
 	set(searchable_bag& s_bag);
 
 	bool has(int) const;
