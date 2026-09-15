@@ -48,7 +48,7 @@ int main(int argc, char **argv)
 
 		sa.has(value);
 		sa.print();
-		sa.get_bag().print();
+		//sa.get_bag().print();
 		st.print();
 		sa.clear();
 		int values[] = { 1, 2, 3, 4 };

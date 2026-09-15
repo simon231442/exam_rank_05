@@ -25,7 +25,7 @@ void				set::clear()
 	bag.clear();
 }
 
-bool				set::has(int) const
+bool				set::has(int value) const
 {
-	return bag.has();
+	return bag.has(value);
 }

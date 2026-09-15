@@ -6,7 +6,7 @@ searchable_array_bag::searchable_array_bag(searchable_array_bag const & src) : a
 
 searchable_array_bag &		searchable_array_bag::operator=(searchable_array_bag const & rhs)
 {
-	if (this != &src)
+	if (this != &rhs)
 		searchable_bag::operator=(rhs);
 	return *this;
 }

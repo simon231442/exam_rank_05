@@ -13,18 +13,18 @@ searchable_tree_bag &	searchable_tree_bag::operator=(searchable_tree_bag const &
 
 searchable_tree_bag::~searchable_tree_bag() { }
 
-static bool				search_value(node node, int value)
+bool				searchable_tree_bag::search_value(node* node, int value) const
 {
 	if (node == 0)
 		return false;
-	if (node.value == value)
+	if (node->value == value)
 		return true;
-	if (node.value < value)
-		return search_value(*(node.l), value);
-	return search_value(*(node.r), value);
+	if (node->value < value)
+		return search_value(node->l, value);
+	return search_value(node->r, value);
 }
 
-bool					searchable_tree_bag::has(int value)
+bool					searchable_tree_bag::has(int value) const
 {
-	return search_value(*tree, value);
+	return search_value(tree, value);
 }
