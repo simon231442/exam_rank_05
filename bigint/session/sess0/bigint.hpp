@@ -6,7 +6,7 @@
 /*   By: srenaud <marvin@42.fr>                        +#+                    */
 /*                                                    +#+                     */
 /*   Created: 2026/08/11 14:48:56 by srenaud        #+#    #+#                */
-/*   Updated: 2026/09/16 13:41:14 by srenaud        ########   odam.nl        */
+/*   Updated: 2026/09/16 16:26:26 by srenaud        ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ class bigint
 		std::string	_digits;
 
 		static std::string			add(std::string const & a, std::string const & b);
-		static bool					less(std::string const & a, std::string const & b);
+//		static bool					less(std::string const & a, std::string const & b);
 		static unsigned long long	toULL(std::string const & s);
 };
 
