@@ -41,14 +41,14 @@ std::string bigint::add(std::string const & a, std::string const & b)
 	std::reverse(result.begin(), result.end());
 	return result;
 }
-/*
+
 bool	bigint::less(std::string const & a, std::string const & b)
 {
 	if (a.size() != b.size())
 		return (a.size() < b.size());
 	return (a < b);
 }
-*/
+
 unsigned long long	bigint::toULL(std::string const & s)
 {
 	unsigned long long max = std::numeric_limits<unsigned long long>::max();//a retenir par coeur
@@ -102,24 +102,24 @@ bigint&		bigint::operator>>=(unsigned long long n)
 	return *this;
 }
 
-bigint		bigint::operator<<(bigint const & n) const
+bigint		bigint::operator<<(bigint const & rhs) const
 {
-	return *this << toULL(n._digits);
+	return *this << toULL(rhs._digits);
 }
 
-bigint		bigint::operator>>(bigint const & n) const
+bigint		bigint::operator>>(bigint const & rhs) const
 {
-	return *this >> toULL(n._digits);
+	return *this >> toULL(rhs._digits);
 }
 
-bigint&		bigint::operator<<=(bigint const & n)
+bigint&		bigint::operator<<=(bigint const & rhs)
 {
-	return *this <<= toULL(n._digits);
+	return *this <<= toULL(rhs._digits);
 }
 
-bigint&		bigint::operator>>=(bigint const & n)
+bigint&		bigint::operator>>=(bigint const & rhs)
 {
-	return *this >>= toULL(n._digits);
+	return *this >>= toULL(rhs._digits);
 }
 
 bigint&		bigint::operator++()
@@ -147,27 +147,27 @@ bool		bigint::operator!=(bigint const & rhs) const
 
 bool		bigint::operator>(bigint const & rhs) const
 {
-	return (toULL(_digits) > toULL(rhs._digits));
+	return (less(rhs._digits, _digits));
 }
 
 bool		bigint::operator>=(bigint const & rhs) const
 {
-	return (toULL(_digits) >= toULL(rhs._digits));
+	return !(less(_digits, rhs._digits));
 }
 
 bool		bigint::operator<(bigint const & rhs) const
 {
-	return (toULL(_digits) < toULL(rhs._digits));
+	return (less(_digits, rhs._digits));
 }
 
 bool		bigint::operator<=(bigint const & rhs) const
 {
-	return (toULL(_digits) <= toULL(rhs._digits));
+	return !(less(rhs._digits, _digits));//!(a < b) == (a >= b) //!(b < a) == (a <= b)
 }
 
-std::ostream&	operator<<(std::ostream & os, bigint const & n)
+std::ostream&	operator<<(std::ostream & os, bigint const & bigint)
 {
-	os << n._digits;
+	os << bigint._digits;
 	return os;
 }
 

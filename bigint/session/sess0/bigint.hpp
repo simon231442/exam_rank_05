@@ -6,7 +6,7 @@
 /*   By: srenaud <marvin@42.fr>                        +#+                    */
 /*                                                    +#+                     */
 /*   Created: 2026/08/11 14:48:56 by srenaud        #+#    #+#                */
-/*   Updated: 2026/09/16 16:26:26 by srenaud        ########   odam.nl        */
+/*   Updated: 2026/09/16 18:01:36 by srenaud        ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ class bigint
 		bigint		operator>>(unsigned long long n) const;
 		bigint&		operator<<=(unsigned long long n);
 		bigint&		operator>>=(unsigned long long n);
-		bigint		operator<<(bigint const & n) const;
-		bigint		operator>>(bigint const & n) const;
-		bigint&		operator<<=(bigint const & n);
-		bigint&		operator>>=(bigint const & n);
+		bigint		operator<<(bigint const & rhs) const;
+		bigint		operator>>(bigint const & rhs) const;
+		bigint&		operator<<=(bigint const & rhs);
+		bigint&		operator>>=(bigint const & rhs);
 
 		bigint&		operator++();
 		bigint		operator++(int);
@@ -44,13 +44,13 @@ class bigint
 		bool		operator<(bigint const & rhs) const;
 		bool		operator<=(bigint const & rhs) const;
 
-		friend std::ostream&	operator<<(std::ostream & os, bigint const & n);
+		friend std::ostream&	operator<<(std::ostream & os, bigint const & bigint);
 
 	private:
 		std::string	_digits;
 
 		static std::string			add(std::string const & a, std::string const & b);
-//		static bool					less(std::string const & a, std::string const & b);
+		static bool					less(std::string const & a, std::string const & b);
 		static unsigned long long	toULL(std::string const & s);
 };
 
