@@ -1,16 +1,18 @@
 #include "bigint.hpp"
+#include "algorithm"
+#include "limits"
 
-bigint::bigint() : digits_("0") {}
+bigint::bigint() : _digits("0") {}
 
 bigint::bigint(unsigned int n)
 {
 	if  (n == 0)
-		digits_ = "0";
+		_digits = "0";
 	std::string		digits;
 	while (n > 0)
 	{
 		digits.push_back(static_cast<char>(n % 10 + '0'));
-		n / 10;
+		n = n / 10;
 	}
 		std::reverse(digits.begin(), digits.end());
 		_digits = digits;
@@ -30,17 +32,17 @@ std::string bigint::add(std::string const & a, std::string const & b)
 			sum += a[a.size() - 1 - i] - '0'; //est-ce ok avec les type
 		if (i < b.size())
 			sum += b[b.size() - 1 - i] - '0';
-		result.pushback(static_cast<char>(sum % 10 + '0');
+		result.push_back(static_cast<char>(sum % 10 + '0'));
 		carry = sum / 10;
 	}
 	std::reverse(result.begin(), result.end());
 	return result;
 }
 
-std::bool	bigint::less(std::string const & a, std::string const & b)
+bool	bigint::less(std::string const & a, std::string const & b)
 {
 	if (a.size() != b.size())
-		return (a.size() < b.size())
+		return (a.size() < b.size());
 	return (a < b);
 }
 
@@ -65,4 +67,74 @@ bigint		bigint::operator+(bigint const & rhs) const
 	bigint	result(*this);
 	return	result += rhs;
 }
+
 bigint&		bigint::operator+=(bigint const & rhs)
+{
+	_digits = add(_digits, rhs._digits);
+	return *this;
+}
+
+bigint		bigint::operator<<(unsigned long long n) const
+{
+}
+
+bigint		bigint::operator>>(unsigned long long n) const
+{
+}
+
+bigint&		bigint::operator<<=(unsigned long long n)
+{
+}
+
+bigint&		bigint::operator>>=(unsigned long long n)
+{
+}
+
+bigint		bigint::operator<<(bigint const & n) const
+{
+}
+
+bigint		bigint::operator>>(bigint const & n) const
+{
+}
+
+bigint&		bigint::operator<<=(bigint const & n)
+{
+}
+
+bigint&		bigint::operator>>=(bigint const & n)
+{
+}
+
+bigint&		bigint::operator++()
+{
+}
+
+bigint		bigint::operator++(int)
+{
+}
+
+bool		bigint::operator==(bigint const & rhs) const
+{
+}
+
+bool		bigint::operator!=(bigint const & rhs) const
+{
+}
+
+bool		bigint::operator>(bigint const & rhs) const
+{
+}
+
+bool		bigint::operator>=(bigint const & rhs) const
+{
+}
+
+bool		bigint::operator<(bigint const & rhs) const
+{
+}
+
+bool		bigint::operator<=(bigint const & rhs) const
+{
+}
+
