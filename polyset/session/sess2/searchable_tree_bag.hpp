@@ -3,7 +3,7 @@
 #include "searchable_bag.hpp"
 #include "tree_bag.hpp"
 
-class searchable_tree_bag : public searchable_bag, public array_bag {
+class searchable_tree_bag : public searchable_bag, public tree_bag {
 	public :
 		searchable_tree_bag();
 		searchable_tree_bag(searchable_tree_bag const & src);
@@ -11,5 +11,5 @@ class searchable_tree_bag : public searchable_bag, public array_bag {
 		~searchable_tree_bag();
 
 		bool					has(int) const;
-		bool					search(node* node, int value) const;
+		bool					search(tree_bag::node* node, int value) const;
 };

@@ -30,6 +30,18 @@ searchable_tree_bag::~searchable_tree_bag()
 {
 }
 
+bool					searchable_tree_bag::search(node* node, int value) const
+{
+	if (*node == 0)
+		return false;
+	if (value < node->value)
+		return search(node->l, value);
+	if (value > node->value)
+		return search(node->r, value);
+	return true;
+}
+
 bool					searchable_tree_bag::has(int value) const
 {
+	return search(node, value);
 }
