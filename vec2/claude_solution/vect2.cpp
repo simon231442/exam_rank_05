@@ -119,6 +119,6 @@ vect2 operator*(int scalar, vect2 const & rhs) {	// Multiplication scalaire à g
 }
 
 std::ostream & operator<<(std::ostream & out, vect2 const & rhs) {	// Affichage : std::cout << v
-	out << "(" << rhs[0] << ", " << rhs[1] << ")";
+	out << "{" << rhs[0] << ", " << rhs[1] << "}";
 	return out;
 }
