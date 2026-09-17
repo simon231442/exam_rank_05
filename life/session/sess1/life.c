@@ -73,7 +73,7 @@ int		main(int ac, char *av[])
 	{
 		boad[i] = calloc(width, sizeof(char));
 		if (!board[i])
-			return frea_all();
+			return free_all();
 		for (int j = 0 ; j < width ; ++j)
 			board[i][j] = ' ';
 	}
