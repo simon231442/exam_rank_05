@@ -8,10 +8,18 @@ char	em;
 char	ob;
 char	fu;
 char	**map;
+int		l;
+int		**board;
+int		x;
+int		y;
+int		lb;
 
 void	err(void) {fprintf(stderr, "map error\n"); }
+void	freeA(void);
 int		getK(void);
 int		fillM(void);
+int		getB(void);
+int		findB(void);
 
 int main(int ac, char *av[])
 {
@@ -29,6 +37,11 @@ int main(int ac, char *av[])
 		return (err(), 1);
 	if (fillM())
 		return (err(), 1);
+	if (getB())
+		return (err(), 1);
+	if (findB())
+		return (err(), 1);
+	freeA();
 	return 0;
 	//get et parse la 1 ligne
 	//creer le tableau de de char
@@ -36,6 +49,15 @@ int main(int ac, char *av[])
 	//faire le dp
 	//remplir tableau de char avec bsq
 	//afficher
+}
+
+void	freeA(void)
+{
+	int		i = 0;
+
+	while (map && map[i])
+		free(map[i++]);
+	free(map);
 }
 
 int		getK(void)
@@ -72,33 +94,57 @@ int		getK(void)
 	return 0;
 }
 
-int		check(* line);
+int		check(char* line);
 int		fillM(void)
 {
 	size_t	size = 0;
-	int		l;
 
 	map = calloc(n, sizeof(char**));
-		if (!map)
-			return (freeA, 1);
+	if (!map)
+		return (freeA(), 1);
 	l = (int)getline(&map[0], &size, file);
-	if (!map[i])
-		return (freeA, 1);
+	if (l == -1)
+		return (freeA(), 1);
 	for (int i = 1; i < n; ++i)
 	{
-		if (l != getline(&map[i], &size, file) || !map[i] || check(map[i]))
-			return (freeA, 1);
+		if (l != getline(&map[i], &size, file) || l == -1 || check(map[i]))
+			return (freeA(), 1);
 	}
+	return 0;
 }
 
 int		check(char* line)
 {
 	while (*line && *line != '\n')
 	{
-		if (line[i] != em || line[i] != ob || line[i] != fu)
-			return (freeA, 1);
+		if (*line != em || *line != ob || *line != fu)
+			return (freeA(), 1);
+		line++;
 	}
+	if (*line != '\n')
+		return (freeA(), 1);
+	return 0;
+}
 
+int		getB(void)
+{
+	board = calloc(n, sizeof(int **));
+	if (!board)
+		return (freeA(), 1);
+	for (int i = 0; i < n; ++i)
+	{
+		board[i] = calloc(n, sizeof(int *));
+		if (!board)
+			return (freeA(), 1);
+	}
+	return 0;
+}
+
+int		findB(void)
+{
+
+
+	
 	
 
 
