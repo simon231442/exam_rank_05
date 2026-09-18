@@ -10,9 +10,7 @@ char	fu;
 char	**map;
 int		l;
 int		**board;
-int		x;
-int		y;
-int		lb;
+int		lb = 0;
 
 void	err(void) {fprintf(stderr, "map error\n"); }
 void	freeA(void);
@@ -140,8 +138,41 @@ int		getB(void)
 	return 0;
 }
 
+int		getmin(int i, int j);
 int		findB(void)
 {
+	for (int i = 0; i < n; ++i)
+	{
+		for (int j = 0; j < l; ++j)
+		{
+			if (map[i][j] == em)
+				continue;
+			else if (i == 0 || j == 0)
+				board[i][j] = 1;
+			else
+				board[i][j] = getmin(i, j) + 1;
+			 lb = (board[i][j] > lb) ? board[i][j] : lb;
+		}
+	}
+	if (lb == 0)
+		return 1;
+	return 0;
+}
+
+int		getmin(int i, int j)
+{
+	int up = board[i - 1][j];
+	int dia = board[i - 1][j - 1];
+	int le = board[i][j - 1];
+	int min;
+
+	min = (up < dia) ? up : dia;
+	min = (min < le) ? min : le;
+	return (min);
+}
+
+
+
 
 
 	
