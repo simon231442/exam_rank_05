@@ -11,6 +11,8 @@ char	**map;
 int		l;
 int		**board;
 int		lb = 0;
+int		xb = 0;
+int		yb = 0;
 
 void	err(void) {fprintf(stderr, "map error\n"); }
 void	freeA(void);
@@ -18,6 +20,7 @@ int		getK(void);
 int		fillM(void);
 int		getB(void);
 int		findB(void);
+void	display(void);
 
 int main(int ac, char *av[])
 {
@@ -39,6 +42,7 @@ int main(int ac, char *av[])
 		return (err(), 1);
 	if (findB())
 		return (err(), 1);
+	display();
 	freeA();
 	return 0;
 	//get et parse la 1 ligne
@@ -56,6 +60,9 @@ void	freeA(void)
 	while (map && map[i])
 		free(map[i++]);
 	free(map);
+	while (board && board[i])
+		free(board[i++]);
+	free(board);
 }
 
 int		getK(void)
@@ -151,7 +158,12 @@ int		findB(void)
 				board[i][j] = 1;
 			else
 				board[i][j] = getmin(i, j) + 1;
-			 lb = (board[i][j] > lb) ? board[i][j] : lb;
+			if (board[i][j] > lb)
+			{
+				lb = board[i][j];
+				xb = j;
+				yb = i;
+			}
 		}
 	}
 	if (lb == 0)
@@ -171,6 +183,29 @@ int		getmin(int i, int j)
 	return (min);
 }
 
+int		isS(int i, int j);
+void	display(void)
+{
+	for (int i = 0; i < n; ++i)
+	{
+		for (int j = 0; j < l; ++i)
+		{
+			if (isS(i, j))
+				fprintf(stdout, "%c", fu);
+			else
+				fprintf(stdout, "%c", map[i][j]);
+		}
+		fprintf(stdout, "\n");
+	}
+}
+
+int		isS(int i, int j)
+{
+	if (i < yb && i > yb -lb &&
+			j < xb && j > xb -lb)
+		return 1;
+	return 0;
+}
 
 
 
