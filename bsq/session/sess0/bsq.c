@@ -57,10 +57,11 @@ void	freeA(void)
 {
 	int		i = 0;
 
-	while (map /*&& &map[i]*/)
+	while (map && i < n && map[i])
 		free(map[i++]);
 	free(map);
-	while (board /*&& &board[i]*/)
+	i = 0;
+	while (board && i < n && board[i])
 		free(board[i++]);
 	free(board);
 }
@@ -103,20 +104,32 @@ int		getK(void)
 int		check(char* line);
 int		fillM(void)
 {
-	size_t	size = 0;
+	int		l = 0;
+	size_t	nu = 0;
 
-	map = calloc(n, sizeof(char**));
+	map = calloc(n, sizeof(char **));
 	if (!map)
 		return (freeA(), 1);
-	l = (int)getline(&line, &size, file);
+	line = NULL;
+	l = getline(&line, &nu, file);
 	if (l == -1)
 		return (freeA(), 1);
 	map[0] = line;
-	for (int i = 1; i < n; ++i)
+	line = NULL;
+	int rl = l;
+	int i = 1;
+	while (1)
 	{
-		if (l != getline(&line, &size, file) || l == -1 || check(line))
+		l = getline(&line, &nu, file);
+		if (l == -1)
+			break;
+		if (l != rl)
+		{
+			free(line);
 			return (freeA(), 1);
-		map[i] = line;
+		}
+		map[i++] = line;
+		line = NULL;
 	}
 	return 0;
 }
