@@ -149,12 +149,12 @@ int		check(char* line)
 
 int		getB(void)
 {
-	board = calloc(n, sizeof(int **));
+	board = calloc(n, sizeof(int *));
 	if (!board)
 		return (freeA(), 1);
 	for (int i = 0; i < n; ++i)
 	{
-		board[i] = calloc(n, sizeof(int *));
+		board[i] = calloc(l, sizeof(int ));
 		if (!board)
 			return (freeA(), 1);
 	}
@@ -215,12 +215,11 @@ void	display(void)
 	}
 }
 
-int		isS(int i, int j)
+int		isS(int i, int j)//xb = 12 yb = 7 l = 7
 {
-	int y1 = yb - l + 1;
-	int x1 = xb - l + 1;
-
-	if (i >= y1 && i <= yb && j >= x1 && j <= xb)
+	//0123...789//j > xb -l && j <= xb
+	if ((i > (yb -lb)) && (i <= yb) &&
+			(j > (xb -lb)) && (j <= xb))
 		return 1;
 	return 0;
 }
