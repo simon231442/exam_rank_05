@@ -104,7 +104,6 @@ int		getK(void)
 int		check(char* line);
 int		fillM(void)
 {
-	int		l = 0;
 	size_t	nu = 0;
 
 	map = calloc(n, sizeof(char **));
@@ -116,14 +115,14 @@ int		fillM(void)
 		return (freeA(), 1);
 	map[0] = line;
 	line = NULL;
-	int rl = l;
+	int tmpl = l;
 	int i = 1;
 	while (1)
 	{
-		l = getline(&line, &nu, file);
-		if (l == -1)
+		tmpl = getline(&line, &nu, file);
+		if (tmpl == -1)
 			break;
-		if (l != rl)
+		if (l != tmpl)
 		{
 			free(line);
 			return (freeA(), 1);
@@ -168,7 +167,7 @@ int		findB(void)
 	{
 		for (int j = 0; j < l; ++j)
 		{
-			if (map[i][j] == em)
+			if (map[i][j] == ob)
 				continue;
 			else if (i == 0 || j == 0)
 				board[i][j] = 1;
