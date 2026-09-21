@@ -130,6 +130,7 @@ int		fillM(void)
 		map[i++] = line;
 		line = NULL;
 	}
+	--l;
 	return 0;
 }
 
@@ -203,7 +204,7 @@ void	display(void)
 {
 	for (int i = 0; i < n; ++i)
 	{
-		for (int j = 0; j < l; ++i)
+		for (int j = 0; j < l; ++j)
 		{
 			if (isS(i, j))
 				fprintf(stdout, "%c", fu);
@@ -216,8 +217,10 @@ void	display(void)
 
 int		isS(int i, int j)
 {
-	if (i < yb && i > yb -lb &&
-			j < xb && j > xb -lb)
+	int y1 = yb - l + 1;
+	int x1 = xb - l + 1;
+
+	if (i >= y1 && i <= yb && j >= x1 && j <= xb)
 		return 1;
 	return 0;
 }
