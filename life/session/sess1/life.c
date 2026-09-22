@@ -1,4 +1,4 @@
-#include <unsitd.h>
+#include <unistd.h>
 #include <stdlib.h>
 
 int		width;
@@ -22,11 +22,11 @@ int		free_all(void)
 
 void	board_fill(void)
 {
-	char	*buffer;
+	char	buffer;
 
-	while (read(STDIN_FILENO, buffer, 1) == 1)
+	while (read(STDIN_FILENO, &buffer, 1) == 1)
 	{
-		switch (*buffer)
+		switch (buffer)
 		{
 			case 'w' :
 				if (k > 0)
@@ -55,9 +55,15 @@ void	board_fill(void)
 	}
 }
 
-
-
-
+void	display(void)
+{
+	for (int i = 0; i < height; ++i)
+	{
+		for(int j = 0; j < width; ++j)
+			write(1, &board[i][j], 1);
+		write(1, "\n", 1);
+	}
+}
 
 int		main(int ac, char *av[])
 {
@@ -71,13 +77,15 @@ int		main(int ac, char *av[])
 		return 1;
 	for (int i = 0; i < height ; ++i)
 	{
-		boad[i] = calloc(width, sizeof(char));
+		board[i] = calloc(width, sizeof(char));
 		if (!board[i])
 			return free_all();
 		for (int j = 0 ; j < width ; ++j)
 			board[i][j] = ' ';
 	}
 	board_fill();
+	return 0;
+}
 
 
 
