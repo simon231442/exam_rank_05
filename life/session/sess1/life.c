@@ -8,6 +8,7 @@ int		k;
 int		l;
 int		draw;
 char**	board;
+char**	copyB;
 
 int		free_all(void)
 {
@@ -18,6 +19,57 @@ int		free_all(void)
 	}
 	free(board);
 	return 1;
+}
+
+void	copy(void);
+void	count(int i, int j);
+void	iter(void)
+{
+	copy();
+	for (int i = 0; i < height ; ++i)
+	{
+		for (int j = 0 ; j < width ; ++j)
+		{
+			count(i,j);
+		}
+}
+
+void	copy(void)
+{
+	copyB = calloc(height, sizeof(char *));
+	if (!copyB)
+		return 1;
+	for (int i = 0; i < height ; ++i)
+	{
+		copyB[i] = calloc(width, sizeof(char));
+		if (!copyB[i])
+			return free_all();
+		for (int j = 0 ; j < width ; ++j)
+			copyB[i][j] = board[i][j];
+	}
+}
+
+void	count(int i, int j)
+{
+	int res = 0;
+
+	if (i - 1 > 0 && copyB[i - 1][j] == 'o')
+		count++;
+	if (i + 1 < height && copyB[i + 1][j] == 'o')
+		count++;
+	if (j - 1 > 0 && copyB[j - 1][j] == 'o')
+		count++;
+	if (j + 1 < width && copyB[j + 1][j] == 'o')
+		count++;
+
+	if (i - 1 > 0 && j - 1 > 0 && copyB[i - 1][j - 1] == 'o')
+		count++;
+	if (i - 1 > 0 &&
+	if (i + 1 < height && copyB[i + 1][j] == 'o')
+		count++;
+
+
+
 }
 
 void	board_fill(void)
@@ -84,6 +136,11 @@ int		main(int ac, char *av[])
 			board[i][j] = ' ';
 	}
 	board_fill();
+	for (int i = 0; i < iteration; ++i)
+	{
+		iter();
+	}
+	display();
 	return 0;
 }
 
