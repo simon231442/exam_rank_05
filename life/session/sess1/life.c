@@ -34,8 +34,16 @@ void	iter(void)
 			int n = count(i,j);
 			if (board[i][j] == '0')
 				if (count == 2 || count == 3)
-					board
+					continue;
+				else
+					board[i][j] = ' ';
+			else
+				if (count ==  3)
+					board[i][j] = 'o';
 		}
+	}
+	for (int i = 0; i < :w
+
 }
 
 void	copy(void)
@@ -74,40 +82,6 @@ int		isInside(int x, int y)
 {
 	return (x >= 0 && x < width && y >= 0 && y < height);
 }
-
-/*
-	if (i > 0)
-	{
-		if (copyb[i - 1][j] == 'o')
-			++res;
-		if (j > 0 && copyB[i - 1][j - 1] == 'o')
-			++res;
-		if (j + 1 < width && copyB[i + 1][j +1] == 'o')
-			++res;
-	}
-	if (j > 0)
-	{
-		if (i + 1 < height && copyB[i + 1][j - 1] == 'o')
-			++res;
-		if (
-
-	if (i - 1 > 0 && copyB[i - 1][j] == 'o')
-		count++;
-	if (i + 1 < height && copyB[i + 1][j] == 'o')
-		count++;
-	if (j - 1 > 0 && copyB[j - 1][j] == 'o')
-		count++;
-	if (j + 1 < width && copyB[j + 1][j] == 'o')
-		count++;
-
-	if (i - 1 > 0 && j - 1 > 0 && copyB[i - 1][j - 1] == 'o')
-		count++;
-	if (i - 1 > 0 &&
-	if (i + 1 < height && copyB[i + 1][j] == 'o')
-		count++;
-		*/
-}
-
 
 void	board_fill(void)
 {
@@ -174,9 +148,7 @@ int		main(int ac, char *av[])
 	}
 	board_fill();
 	for (int i = 0; i < iteration; ++i)
-	{
 		iter();
-	}
 	display();
 	return 0;
 }
