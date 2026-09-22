@@ -10,7 +10,7 @@ int		draw;
 char**	board;
 char**	copyB;
 
-int		free_all(void)
+void	free_all(void)
 {
 	for (int i = 0; i < height; ++i)
 	{
@@ -18,39 +18,39 @@ int		free_all(void)
 			free(board[i]);
 	}
 	free(board);
-	return 1;
 }
 
 void	copy(void);
-void	count(int i, int j);
+int		count(int i, int j);
 void	iter(void)
 {
-	int count = 0;
+	int c = 0;
 	copy();
 	for (int i = 0; i < height ; ++i)
 	{
 		for (int j = 0 ; j < width ; ++j)
 		{
-			int n = count(i,j);
+			c = count(i,j);
 			if (board[i][j] == '0')
-				if (count == 2 || count == 3)
+				if (c == 2 || c == 3)
 					continue;
 				else
 					board[i][j] = ' ';
 			else
-				if (count ==  3)
+				if (c ==  3)
 					board[i][j] = 'o';
 		}
 	}
-	for (int i = 0; i < :w
-
+	for (int i = 0; i < height; ++i)
+		free(copyB[i]);
+	free(copyB);
 }
 
 void	copy(void)
 {
 	copyB = calloc(height, sizeof(char *));
 	if (!copyB)
-		return 1;
+		return;
 	for (int i = 0; i < height ; ++i)
 	{
 		copyB[i] = calloc(width, sizeof(char));
@@ -66,9 +66,9 @@ int		count(int i, int j)
 {
 	int res = 0;
 
-	for (dy = -1; dy <= 1; dy++)
+	for (int dy = -1; dy <= 1; dy++)
 	{
-		for (dx = -1; dx <= 1; dx++)
+		for (int dx = -1; dx <= 1; dx++)
 		{
 			int x = dx + j;
 			int y = dy + i;
@@ -76,6 +76,7 @@ int		count(int i, int j)
 				++res;
 		}
 	}
+	return 1;
 }
 
 int		isInside(int x, int y)
@@ -142,7 +143,7 @@ int		main(int ac, char *av[])
 	{
 		board[i] = calloc(width, sizeof(char));
 		if (!board[i])
-			return free_all();
+			return (free_all(), 1);
 		for (int j = 0 ; j < width ; ++j)
 			board[i][j] = ' ';
 	}
