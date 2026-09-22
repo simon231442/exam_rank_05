@@ -25,12 +25,16 @@ void	copy(void);
 void	count(int i, int j);
 void	iter(void)
 {
+	int count = 0;
 	copy();
 	for (int i = 0; i < height ; ++i)
 	{
 		for (int j = 0 ; j < width ; ++j)
 		{
-			count(i,j);
+			int n = count(i,j);
+			if (board[i][j] == '0')
+				if (count == 2 || count == 3)
+					board
 		}
 }
 
@@ -49,9 +53,43 @@ void	copy(void)
 	}
 }
 
-void	count(int i, int j)
+int		isInside(int x, int y);
+int		count(int i, int j)
 {
 	int res = 0;
+
+	for (dy = -1; dy <= 1; dy++)
+	{
+		for (dx = -1; dx <= 1; dx++)
+		{
+			int x = dx + j;
+			int y = dy + i;
+			if (isInside(x, y) && copyB[y][x] == '0')
+				++res;
+		}
+	}
+}
+
+int		isInside(int x, int y)
+{
+	return (x >= 0 && x < width && y >= 0 && y < height);
+}
+
+/*
+	if (i > 0)
+	{
+		if (copyb[i - 1][j] == 'o')
+			++res;
+		if (j > 0 && copyB[i - 1][j - 1] == 'o')
+			++res;
+		if (j + 1 < width && copyB[i + 1][j +1] == 'o')
+			++res;
+	}
+	if (j > 0)
+	{
+		if (i + 1 < height && copyB[i + 1][j - 1] == 'o')
+			++res;
+		if (
 
 	if (i - 1 > 0 && copyB[i - 1][j] == 'o')
 		count++;
@@ -67,10 +105,9 @@ void	count(int i, int j)
 	if (i - 1 > 0 &&
 	if (i + 1 < height && copyB[i + 1][j] == 'o')
 		count++;
-
-
-
+		*/
 }
+
 
 void	board_fill(void)
 {
