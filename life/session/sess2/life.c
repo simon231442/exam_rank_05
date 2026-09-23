@@ -80,7 +80,7 @@ void	display(void)
 	}
 }
 
-int		count(int i, int j);
+int		count(int i, int j, int copy[][100]);
 void	iter(void) 
 {
 	int	copy[100][100];
@@ -91,16 +91,40 @@ void	iter(void)
 	}
 	for (int i = 0; i < h; ++i)
 	{
-		for (int j = 0; j < h; ++j)
+		for (int j = 0; j < w; ++j)
 		{
-			int count = count(i,j);
+			int c = count(i, j, copy);
+			if (board[i][j] == 1)
+				if (c == 2 || c == 3)
+					continue;
+				else
+					board[i][j] = 0;
+			else if (board[i][j] == 0 && c == 3)
+				board[i][j] = 1;
 		}
 	}
 }
 
-/*
-int		count(int i, int j)
+int		isIn(int x, int y);
+int		count(int i, int j, int copy[][100])
 {
-*/
+	int count = 0;
+	for (int dy = -1; dy <= 1; ++dy)
+	{
+		for (int dx = -1; dx <= 1; ++dx)
+		{
+			int y = dy + i;
+			int x = dx + j;
+			if (isIn(x, y) && copy[y][x])
+				++count;
+		}
+	}
+	return count;
+}
+
+int		isIn(int x, int y)
+{
+	return (x >= 0 && x < w && y >= 0 && y < h);
+}
 
 
