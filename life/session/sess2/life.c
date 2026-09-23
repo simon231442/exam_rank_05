@@ -18,7 +18,10 @@ int		main(int ac, char *av[])
 	it = atoi(av[3]);
 	fillB();
 	for (int i = 0; i < h; ++i)
+	{
+		display();
 		iter();
+	}
 	display();
 	return 0;
 }
@@ -86,7 +89,7 @@ void	iter(void)
 	int	copy[100][100];
 	for (int i = 0; i < h; ++i)
 	{
-		for (int j = 0; j < h; ++j)
+		for (int j = 0; j < w; ++j)
 			copy[i][j] = board[i][j];
 	}
 	for (int i = 0; i < h; ++i)
@@ -95,12 +98,31 @@ void	iter(void)
 		{
 			int c = count(i, j, copy);
 			if (board[i][j] == 1)
+			{
+				if (c == 2 || c == 3)
+					board[i][j] = 1;
+				else
+					board[i][j] = 0;
+			}
+			if (board[i][j] == 1)
+			{
+				if (c == 3)
+					board[i][j] = 1;
+				else
+					board[i][j] = 0;
+			}
+
+			/*
+			if (board[i][j] == 1)
+			{
 				if (c == 2 || c == 3)
 					continue;
 				else
 					board[i][j] = 0;
+			}
 			else if (board[i][j] == 0 && c == 3)
 				board[i][j] = 1;
+				*/
 		}
 	}
 }
@@ -109,12 +131,17 @@ int		isIn(int x, int y);
 int		count(int i, int j, int copy[][100])
 {
 	int count = 0;
+	int y;
+	int x;
+
 	for (int dy = -1; dy <= 1; ++dy)
 	{
 		for (int dx = -1; dx <= 1; ++dx)
 		{
-			int y = dy + i;
-			int x = dx + j;
+			if (dy == 0 && dx == 0)
+				continue;
+			y = dy + i;
+			x = dx + j;
 			if (isIn(x, y) && copy[y][x])
 				++count;
 		}
