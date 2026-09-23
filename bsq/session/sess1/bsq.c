@@ -11,7 +11,7 @@ char	*line = NULL;
 size_t	bit = 0;
 
 //int fprintf(FILE *stream, const char *format, ...);
-void	printE(void) {fprintf(stdout, "map error\n"); return 1;}
+void	printE(void) {fprintf(stdout, "map error\n");}
 
 void	solve(void);
 int		main(int ac, char *av[])
@@ -41,17 +41,32 @@ int		main(int ac, char *av[])
 int		setK(void);
 void	solve(void)
 {
-	if (setK)
+	if (setK())
 		return(printE());
 }
 
 int		setK(void)
 {
-	int	ret = fscanf(file, "%d %c %c %c", h, emp, obs, full);
+	int	ret = fscanf(file, "%d %c %c %c", &h, &emp, &obs, &full);
 	//ssize_t getline(char **lineptr, size_t *n, FILE *stream);
-//	w = (int)getline(&line, &bit, file);
 	//int fscanf(FILE *stream, const char *format, ...);
-	
+	if (ret != 4)
+		return 1;
+	if (h < 1)
+		return 1;
+	if (emp < 32 || obs < 32 || full < 32)
+		return 1;
+	if (emp > 126 || obs > 126 || full > 126)
+		return 1;
+	if (emp == obs || emp == full)
+		return 1;
+	if (obs == full)
+		return 1;
+//	printf("%d %c %c %c %d", h, emp, obs, full, ret);
+	w = (int)getline(&line, &bit, file);
+//	printf("%s",line);
+	free(line);
+	line = NULL;
 	return 0;
 }
 
