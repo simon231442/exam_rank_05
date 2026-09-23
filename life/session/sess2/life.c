@@ -17,7 +17,7 @@ int		main(int ac, char *av[])
 	h = atoi(av[2]);
 	it = atoi(av[3]);
 	fillB();
-	for (int i = 0; i < h; ++i)
+	for (int i = 0; i < it; ++i)
 	{
 		display();
 		iter();
@@ -72,12 +72,12 @@ void	display(void)
 {
 	for (int i = 0; i < h; ++i)
 	{
-		for (int j = 0; j < h; ++j)
+		for (int j = 0; j < w; ++j)
 		{
 			if (board[i][j] == 0)
 				write(1, " ", 1);
 			if (board[i][j] == 1)
-				write(1, "o", 1);
+				write(1, "O", 1);
 		}
 		write(1, "\n", 1);
 	}
@@ -104,7 +104,7 @@ void	iter(void)
 				else
 					board[i][j] = 0;
 			}
-			if (board[i][j] == 1)
+			else if (board[i][j] == 0)
 			{
 				if (c == 3)
 					board[i][j] = 1;
