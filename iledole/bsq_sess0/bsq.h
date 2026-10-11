@@ -17,9 +17,9 @@ extern int	k;
 extern int	l;
 extern int	lb;
 
-void	getK(void);
-void	getM(void);
-void	display(void);
-void	freeM(void);
-void	findB(void);
-int	min3(int up, int dia, int le);
+void		getK(void);
+void		getM(void);
+void		display(void);
+void		freeM(void);
+void		findB(void);
+int			min3(int up, int dia, int le);

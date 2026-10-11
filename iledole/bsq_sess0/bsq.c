@@ -21,17 +21,11 @@ int	main(int ac, char *av[])
 	else if (ac == 2)
 	{//FILE *fopen(const char *restrict pathname, const char *restrict mode);
 		file = fopen(av[1], "r");
-		if (!file)
-		{
-			ret = 1;
+		if (!file && ret++)
 			goto end;
-		}
 	}
-	else
-	{
-		ret = 1;
+	else if (ret++)
 		goto end;
-	}
 	getK();
 	if (ret)
 		goto end;

@@ -10,10 +10,10 @@ void	getM(void)
 	for (int i = 0; i < h; ++i)
 	{//ssize_t getline(char **restrict lineptr, size_t *restrict n, FILE *restrict stream);
 		r = (int)getline(&line, &bit, file);
-		if ((w + 1 != r || line[w] != '\n') && ret++)
-			return;
 		if (i == 0)
 			w = r - 1;
+		if ((w + 1 != r || line[w] != '\n') && ret++)
+			return;
 		map[i] = calloc(w, sizeof(int));
 		if (!map[i] && ret++)
 			return;
