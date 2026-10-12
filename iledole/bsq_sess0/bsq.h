@@ -23,3 +23,4 @@ void		display(void);
 void		freeM(void);
 void		findB(void);
 int			min3(int up, int dia, int le);
+int			isS(int i, int j);

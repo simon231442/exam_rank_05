@@ -3,7 +3,7 @@
 void	getK(void)
 {//int fscanf(FILE *restrict stream, const char *restrict format, ...);
  //ssize_t getline(char **restrict lineptr, size_t *restrict n, FILE *restrict stream);
-	if (fscanf(file, "%d%c%c%c", &h, &emp, &obs, &full) != 4 || h < 1 || emp == obs || emp == full || full == obs)
+	if (fscanf(file, "%d %c %c %c", &h, &emp, &obs, &full) != 4 || h < 1 || emp == obs || emp == full || full == obs)
 	{
 		ret = 1;
 		return;

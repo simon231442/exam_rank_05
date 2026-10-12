@@ -21,10 +21,10 @@ int	main(int ac, char *av[])
 	else if (ac == 2)
 	{//FILE *fopen(const char *restrict pathname, const char *restrict mode);
 		file = fopen(av[1], "r");
-		if (!file && ret++)
+		if (!file && ++ret)
 			goto end;
 	}
-	else if (ret++)
+	else if (++ret)
 		goto end;
 	getK();
 	if (ret)
@@ -47,4 +47,26 @@ end :
 
 void	display(void)
 {
+	for (int i = 0; i < h; ++i)
+	{
+		for (int j = 0; j < w; ++j)
+		{//int fputs(const char *s, FILE *stream);
+			if (map[i][j] == 0)
+				fprintf(stdout, "%c", obs);
+			else
+			{
+				if (isS(i, j))
+					fprintf(stdout, "%c", full);
+				else
+					fprintf(stdout, "%c", emp);
+			}
+		}
+		fputs("\n", stdout);
+	}
 }
+
+int			isS(int i, int j)
+{
+	return (i <= k && i > k - lb && j <= l && j > l - lb);
+}
+
