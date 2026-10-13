@@ -19,4 +19,5 @@ void	display(char **board);
 void	fillB(void);
 
 void	iter(void);
-int		count(int i, int j, char **copy);
+int		countN(int i, int j, char **copy);
+int		isIn(int y, int x);

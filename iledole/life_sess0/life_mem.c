@@ -32,7 +32,7 @@ char	**getC(char **copy)
 	if (ret)
 		return NULL;
 	for (int i = 0; i < h; ++i)
-		for (int j = 0; i < w; ++j)
+		for (int j = 0; j < w; ++j)
 			copy[i][j] = board[i][j];
 	return copy;
 }
